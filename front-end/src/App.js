@@ -8,6 +8,8 @@ import DriverRegistration from "./Pages/DriverRegistration"
 import VehicleInformation from "./Pages/VehicleInformation"
 import LoginPage from "./Pages/LoginPage"
 import PasswordReset from "./Pages/PasswordReset"
+import PassengerDashboard from "./Pages/PassengerDashboard"
+import HelpPage from "./Pages/HelpPage"
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="VehicleInformation" element={<VehicleInformation />} />
         <Route path="LoginPage" element={<LoginPage />} />
         <Route path="PasswordReset" element={<PasswordReset />} />
+        <Route path="PassengerDashboard" element={<PassengerDashboard />} />
+        <Route path="HelpPage" element={<HelpPage />} />
       </Routes>
       <Footer />
     </div>

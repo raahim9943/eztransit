@@ -21,12 +21,13 @@ export default function LoginPage() {
             type="text"
             placeholder="Password"
           />
-          <button
-            className="text-[#D8DFE5]"
+          <Link
+            className="text-[#D8DFE5] text-center"
             type="submit"
+            to="/PassengerDashboard"
           >
             Login
-          </button>
+          </Link>
         </form>
       </div>
       <Link className="text-xs font-medium text-[#D8DFE5]" to="/PasswordReset">
