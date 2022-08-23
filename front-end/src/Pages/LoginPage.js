@@ -18,7 +18,7 @@ export default function LoginPage() {
           />
           <input
             className="bg-[#D8DFE5] border-solid border-2 border-[#D8DFE5]"
-            type="text"
+            type="password"
             placeholder="Password"
           />
           <Link

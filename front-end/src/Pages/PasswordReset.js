@@ -17,12 +17,12 @@ export default function PasswordReset() {
           />
           <input
             className="bg-[#D8DFE5] border-solid border-2 border-[#D8DFE5]"
-            type="text"
+            type="Password"
             placeholder="New Password"
           />
           <input
             className="bg-[#D8DFE5] border-solid border-2 border-[#D8DFE5]"
-            type="text"
+            type="Password"
             placeholder="Confirm Password"
           />
           <button

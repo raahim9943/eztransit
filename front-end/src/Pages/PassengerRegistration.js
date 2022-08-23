@@ -1,6 +1,7 @@
 import React from "react";
 import swal from "sweetalert";
 
+
 export default function PassengerRegistration() {
   return (
     <div className="flex flex-col items-center justify-center">
@@ -23,12 +24,12 @@ export default function PassengerRegistration() {
           />
           <input
             className="bg-[#D8DFE5] border-solid border-2 border-[#D8DFE5]"
-            type="text"
+            type="Password"
             placeholder="Password"
           />
           <input
             className="bg-[#D8DFE5] border-solid border-2 border-[#D8DFE5]"
-            type="text"
+            type="Password"
             placeholder="Confirm Password"
           />
           <button
