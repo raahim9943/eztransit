@@ -13,11 +13,15 @@ export default function LandingPage() {
       </div>
       <div className="flex flex-row space-x-2">
         <div className="flex flex-col p-12 space-y-2 border-solid border-2 border-[#D8DFE5]">
-          <img
-            className="max-w-[148px]"
-            src={PassengerLogo}
-            alt="passenger-logo"
-          />
+          <Link 
+            to="/PassengerRegistration">
+              <img
+              className="max-w-[148px]"
+              src={PassengerLogo}
+              alt="passenger-logo"
+              />
+            
+          </Link>
           <Link
             className="text-2xl font-medium text-[#D8DFE5] text-center"
             to="/PassengerRegistration"

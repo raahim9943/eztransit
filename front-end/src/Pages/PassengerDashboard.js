@@ -26,7 +26,7 @@ const center = { lat: 31.4591, lng: 74.2757 }
 
 function App() {
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "",
+    googleMapsApiKey: "AIzaSyB4hBKdqncvz9dgVtIWDxQMxYoyg833efk",
     libraries: ['places'],
   })
 
