@@ -6,10 +6,10 @@ import {
   HStack,
   IconButton,
   Input,
-  SkeletonText,
+  Spinner,
   Text,
 } from '@chakra-ui/react'
-import { FaLocationArrow, FaTimes } from 'react-icons/fa'
+import { FaAnchor, FaRegTrashAlt } from 'react-icons/fa'
 
 import {
   useJsApiLoader,
@@ -19,14 +19,15 @@ import {
   DirectionsRenderer,
 } from '@react-google-maps/api'
 import { useRef, useState } from 'react'
+//import { ClassNames } from '@emotion/react'
 
-//31.459153751602436, 74.2757979306847
+// 31.459666252703723, 74.27596959205407
 
-const center = { lat: 31.4591, lng: 74.2757 }
+const center = { lat: 31.4596, lng: 74.2759 }
 
 function App() {
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyB4hBKdqncvz9dgVtIWDxQMxYoyg833efk",
+    googleMapsApiKey: "",
     libraries: ['places'],
   })
 
@@ -41,7 +42,7 @@ function App() {
   const destiantionRef = useRef()
 
   if (!isLoaded) {
-    return <SkeletonText />
+    return <Spinner size='xl' />
   }
 
   async function calculateRoute() {
@@ -77,7 +78,58 @@ function App() {
       h='100vh'
       w='100vw'
     >
-      <Box position='absolute' left={0} top={0} h='100%' w='100%'>
+      <Box
+        p={4}
+        borderRadius='lg'
+        m={4}
+        bgColor=''
+        shadow=''
+        minW='container.md'
+        zIndex='1'
+      >
+        <HStack spacing={2} justifyContent='space-between'>
+          <Box flexGrow={1}>
+            <Autocomplete>
+              <Input color='white' type='text' placeholder='Pickup' ref={originRef} />
+            </Autocomplete>
+          </Box>
+          <Box flexGrow={1}>
+            <Autocomplete>
+              <Input
+                type='text'
+                color='white'
+                placeholder='Destination'
+                ref={destiantionRef}
+              />
+            </Autocomplete>
+          </Box>
+
+          <ButtonGroup>
+            <Button type='submit' onClick={calculateRoute}>
+              Calculate
+            </Button>
+            <IconButton
+              aria-label='center back'
+              icon={<FaRegTrashAlt />}
+              onClick={clearRoute}
+            />
+          </ButtonGroup>
+        </HStack>
+        <HStack spacing={4} mt={4} justifyContent='space-between'>
+          <Text color='tomato'>Route Length: {distance} </Text>
+          <Text color='tomato'>ETA: {duration} </Text>
+          <IconButton
+            aria-label='center back'
+            icon={<FaAnchor />}
+            isRound
+            onClick={() => {
+              map.panTo(center)
+              map.setZoom(15)
+            }}
+          />
+        </HStack>
+      </Box>
+      <Box position='center' left={0} top={0} h='50%' w='40%'>
         {/* Google Map Box */}
         <GoogleMap
           center={center}
@@ -96,56 +148,6 @@ function App() {
             <DirectionsRenderer directions={directionsResponse} />
           )}
         </GoogleMap>
-      </Box>
-      <Box
-        p={4}
-        borderRadius='lg'
-        m={4}
-        bgColor='white'
-        shadow='base'
-        minW='container.md'
-        zIndex='1'
-      >
-        <HStack spacing={2} justifyContent='space-between'>
-          <Box flexGrow={1}>
-            <Autocomplete>
-              <Input type='text' placeholder='Origin' ref={originRef} />
-            </Autocomplete>
-          </Box>
-          <Box flexGrow={1}>
-            <Autocomplete>
-              <Input
-                type='text'
-                placeholder='Destination'
-                ref={destiantionRef}
-              />
-            </Autocomplete>
-          </Box>
-
-          <ButtonGroup>
-            <Button colorScheme='pink' type='submit' onClick={calculateRoute}>
-              Calculate Route
-            </Button>
-            <IconButton
-              aria-label='center back'
-              icon={<FaTimes />}
-              onClick={clearRoute}
-            />
-          </ButtonGroup>
-        </HStack>
-        <HStack spacing={4} mt={4} justifyContent='space-between'>
-          <Text>Distance: {distance} </Text>
-          <Text>Duration: {duration} </Text>
-          <IconButton
-            aria-label='center back'
-            icon={<FaLocationArrow />}
-            isRound
-            onClick={() => {
-              map.panTo(center)
-              map.setZoom(15)
-            }}
-          />
-        </HStack>
       </Box>
     </Flex>
   )

@@ -1,5 +1,4 @@
 import React from "react"
-import { ChakraProvider } from '@chakra-ui/react'
 import { Routes, Route } from "react-router-dom"
 import Header from "./Components/Header"
 import Footer from "./Components/Footer"
@@ -19,7 +18,6 @@ import TermsPage from "./Pages/TermsPage"
 
 function App() {
   return (
-    <ChakraProvider>
     <div class='flex flex-col min-h-screen justify-between bg-gradient-to-r from-[#0F2027] via-[#203A43] to-[#2C5364]'>
       <Header />
       <Routes>
@@ -39,7 +37,6 @@ function App() {
       </Routes>
       <Footer />
     </div>
-    </ChakraProvider>
   )
 }
 
