@@ -30,7 +30,9 @@ export default function LandingPage() {
           </Link>
         </div>
         <div className="flex flex-col p-12 space-y-2 border-solid border-2 border-[#D8DFE5]">
+          <Link to="/DriverRegistration">
           <img className="max-w-[148px]" src={DriverLogo} alt="driver-logo" />
+          </Link>
           <Link
             className="text-2xl font-medium text-[#D8DFE5] text-center"
             to="/DriverRegistration"

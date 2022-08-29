@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function PasswordReset() {
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="py-12">
         <h1 className="text-2xl font-medium text-[#D8DFE5]">
-          Login
+          Password Reset
         </h1>
       </div>
       <div className="p-12 space-y-2 border-solid border-2 border-[#D8DFE5]">
@@ -33,9 +34,9 @@ export default function PasswordReset() {
           </button>
         </form>
       </div>
-      <button className="text-lg font-medium text-[#D8DFE5] py-8">
+      <Link to="/" className="text-lg font-medium text-[#D8DFE5] py-8">
         Don't have an account? Register
-      </button>
+      </Link>
     </div>
   );
 }

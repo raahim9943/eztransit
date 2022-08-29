@@ -27,7 +27,7 @@ const center = { lat: 31.4596, lng: 74.2759 }
 
 function App() {
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "",
+    googleMapsApiKey: "AIzaSyA05KsS8DIlKREkuHWWIHcxS4c41DF4Rnc",
     libraries: ['places'],
   })
 
@@ -78,6 +78,9 @@ function App() {
       h='100vh'
       w='100vw'
     >
+      <h1 className="text-2xl font-medium text-[#D8DFE5]">
+          Passenger Dashboard
+        </h1>
       <Box
         p={4}
         borderRadius='lg'
@@ -90,14 +93,14 @@ function App() {
         <HStack spacing={2} justifyContent='space-between'>
           <Box flexGrow={1}>
             <Autocomplete>
-              <Input color='white' type='text' placeholder='Pickup' ref={originRef} />
+              <Input color='black' type='text' placeholder='Pickup' ref={originRef} />
             </Autocomplete>
           </Box>
           <Box flexGrow={1}>
             <Autocomplete>
               <Input
                 type='text'
-                color='white'
+                color='black'
                 placeholder='Destination'
                 ref={destiantionRef}
               />
@@ -106,7 +109,7 @@ function App() {
 
           <ButtonGroup>
             <Button type='submit' onClick={calculateRoute}>
-              Calculate
+              Find Driver
             </Button>
             <IconButton
               aria-label='center back'

@@ -20,7 +20,7 @@ export default function DriverRegistration() {
       errorMessage:
         "Name should be 3-16 characters and shouldn't include any special character!",
       //label: "Name",
-      pattern: "^[A-Za-z0-9]{3,16}$",
+      pattern: "^(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})",
       required: true,
     },
     {

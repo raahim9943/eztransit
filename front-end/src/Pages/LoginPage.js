@@ -66,9 +66,9 @@ export default function LoginPage() {
       <Link className="text-xs font-medium text-[#D8DFE5]" to="/PasswordReset">
         Forgotten Password?
       </Link>
-      <button className="text-lg font-medium text-[#D8DFE5] py-8">
+      <Link to="/" className="text-lg font-medium text-[#D8DFE5] py-8">
         Don't have an account? Register
-      </button>
+      </Link>
     </div>
   );
 }

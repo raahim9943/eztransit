@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 //import swal from "sweetalert";
 import FormInput from "../Components/FormInput";
+import { Link } from "react-router-dom";
 
 export default function PassengerRegistration() {
   const [values, setValues] = useState({
@@ -19,7 +20,7 @@ export default function PassengerRegistration() {
       errorMessage:
         "Name should be 3-16 characters and shouldn't include any special character!",
       //label: "Name",
-      pattern: "^[A-Za-z0-9]{3,16}$",
+      pattern: "^^(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})",
       required: true,
     },
     {
@@ -82,9 +83,9 @@ export default function PassengerRegistration() {
           <button  className="text-[#D8DFE5]">Register</button>
         </form>
       </div>
-      <button className="text-lg font-medium text-[#D8DFE5] py-8">
+      <Link to="/LoginPage" className="text-lg font-medium text-[#D8DFE5] py-8">
         Have an account? Log In
-      </button>
+      </Link>
     </div>
   );
 }
