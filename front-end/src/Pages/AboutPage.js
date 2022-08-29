@@ -1,5 +1,4 @@
 import React from "react";
-//import { Link } from "react-router-dom";
 import AM from "../Assets/AboutUsMeme.jpg";
 
 export default function AboutPage() {

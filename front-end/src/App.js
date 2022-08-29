@@ -10,7 +10,6 @@ import LoginPage from "./Pages/LoginPage"
 import PasswordReset from "./Pages/PasswordReset"
 import PassengerDashboard from "./Pages/PassengerDashboard"
 import HelpPage from "./Pages/HelpPage"
-import AdminDashboard from "./Pages/AdminDashboard"
 import DriverDashboard from "./Pages/DriverDashboard"
 import AboutPage from "./Pages/AboutPage"
 import CareersPage from "./Pages/CareersPage"
@@ -29,7 +28,6 @@ function App() {
         <Route path="LoginPage" element={<LoginPage />} />
         <Route path="PasswordReset" element={<PasswordReset />} />
         <Route path="PassengerDashboard" element={<PassengerDashboard />} />
-        <Route path="AdminDashboard" element={<AdminDashboard />} />
         <Route path="DriverDashboard" element={<DriverDashboard />}/>
         <Route path="HelpPage" element={<HelpPage />} />
         <Route path="AboutPage" element={<AboutPage />} />

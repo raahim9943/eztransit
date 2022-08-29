@@ -92,9 +92,9 @@ export default function DriverRegistration() {
           </Link>
         </form>
       </div>
-      <button className="text-lg font-medium text-[#D8DFE5] py-8">
+      <Link to="/LoginPage" className="text-lg font-medium text-[#D8DFE5] py-8">
         Have an account? Log In
-      </button>
+      </Link>
     </div>
   );
 }

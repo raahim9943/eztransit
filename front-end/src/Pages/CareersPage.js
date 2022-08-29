@@ -1,5 +1,4 @@
 import React from "react";
-//import { Link } from "react-router-dom";
 import CareerMeme from "../Assets/CareerMeme.jpg";
 
 export default function CareersPage() {

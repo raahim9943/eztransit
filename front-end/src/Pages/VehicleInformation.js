@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-//import swal from "sweetalert";
+import { Link } from "react-router-dom";
 import FormInput from "../Components/FormInput";
 
 export default function VehicleInformation() {
@@ -73,9 +73,9 @@ export default function VehicleInformation() {
           <button className="text-[#D8DFE5]">Register</button>
         </form>
       </div>
-      <button className="text-lg font-medium text-[#D8DFE5] py-8">
+      <Link to="/LoginPage" className="text-lg font-medium text-[#D8DFE5] py-8">
         Have an account? Log In
-      </button>
+      </Link>
     </div>
   );
 }

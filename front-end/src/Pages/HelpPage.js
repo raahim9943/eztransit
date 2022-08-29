@@ -1,5 +1,4 @@
 import React from "react";
-//import { Link } from "react-router-dom";
 import HM1 from "../Assets/HelpMeme1.jpg";
 import HM2 from "../Assets/HelpMeme2.jpg";
 

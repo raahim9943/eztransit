@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-//import swal from "sweetalert";
 import FormInput from "../Components/FormInput";
 import { Link } from "react-router-dom";
 

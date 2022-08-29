@@ -19,7 +19,6 @@ import {
     DirectionsRenderer,
   } from '@react-google-maps/api'
   import { useRef, useState } from 'react'
-  //import { ClassNames } from '@emotion/react'
   
   // 31.459666252703723, 74.27596959205407
   
@@ -109,7 +108,7 @@ import {
   
             <ButtonGroup>
               <Button type='submit' onClick={calculateRoute}>
-                Calculate
+                Accept Ride
               </Button>
               <IconButton
                 aria-label='center back'

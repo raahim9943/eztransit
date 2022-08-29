@@ -1,5 +1,4 @@
 import React from "react";
-//import { Link } from "react-router-dom";
 import TM from "../Assets/EverythingMeme.jpg";
 
 export default function TermsPage() {

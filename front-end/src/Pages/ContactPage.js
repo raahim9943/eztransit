@@ -1,5 +1,4 @@
 import React from "react";
-//import { Link } from "react-router-dom";
 import ContactMeme from "../Assets/sendusaquerymeme.jpg";
 
 export default function ContactPage() {
