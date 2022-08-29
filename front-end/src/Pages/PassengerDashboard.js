@@ -26,7 +26,7 @@ const center = { lat: 31.4596, lng: 74.2759 }
 
 function App() {
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyA05KsS8DIlKREkuHWWIHcxS4c41DF4Rnc",
+    googleMapsApiKey: "",
     libraries: ['places'],
   })
 
@@ -92,14 +92,14 @@ function App() {
         <HStack spacing={2} justifyContent='space-between'>
           <Box flexGrow={1}>
             <Autocomplete>
-              <Input color='black' type='text' placeholder='Pickup' ref={originRef} />
+              <Input color='white' type='text' placeholder='Pickup' ref={originRef} />
             </Autocomplete>
           </Box>
           <Box flexGrow={1}>
             <Autocomplete>
               <Input
                 type='text'
-                color='black'
+                color='white'
                 placeholder='Destination'
                 ref={destiantionRef}
               />

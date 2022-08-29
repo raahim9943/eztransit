@@ -26,7 +26,7 @@ import {
   
   function App() {
     const { isLoaded } = useJsApiLoader({
-      googleMapsApiKey: "AIzaSyA05KsS8DIlKREkuHWWIHcxS4c41DF4Rnc",
+      googleMapsApiKey: "",
       libraries: ['places'],
     })
   
