@@ -1,18 +1,19 @@
 const db = require("../models")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
-const User = db.users
-const Driver = db.drivers
-const Vehicle = db.vehicles
+const User = db.userModel
+const Passenger = db.passengerModel
+const Driver = db.driverModel
+const Vehicle = db.vehicleModel
 
-exports.signup = async (req, res) => {
+exports.create = async (req, res) => {
   if (!req.body) {
     return res.status(400).send({
       message: "Invalid Request!",
     })
   }
 
-  const { name, email, password, userType, location, profile } = req.body
+  const { name, email, password, userType } = req.body
 
   try {
     let user = await User.findOne({
@@ -20,42 +21,17 @@ exports.signup = async (req, res) => {
     })
 
     if (user) {
-      return res.status(400).send({
+      return res.status(409).send({
         message: "User already exists!",
       })
     }
 
-    if (userType) {
-      if (!profile)
-        return res
-          .status(400)
-          .send({ message: "Error creating user with no driver data" })
-
-      const driverProfile = await Driver.findById(profile)
-      if (driverProfile) {
-        user = new User({
-          name,
-          email,
-          password,
-          userType,
-          location,
-          profile,
-        })
-      } else {
-        return res.status(400).send({
-          message: "Error creating user with no driver data",
-        })
-      }
-    } else {
-      user = new User({
-        name,
-        email,
-        password,
-        userType,
-        status: true,
-        location,
-      })
-    }
+    user = new User({
+      name,
+      email,
+      password,
+      userType,
+    })
 
     const salt = await bcrypt.genSalt(10)
     user.password = await bcrypt.hash(password, salt)
@@ -72,14 +48,13 @@ exports.signup = async (req, res) => {
           expiresIn: "7d",
         })
 
-        res.status(201).send({
+        res.status(200).send({
           message: "Signed up successfully!",
           token: token,
+          id: data._id,
           name: data.name,
           email: data.email,
-          location: data.location,
           userType: data.userType,
-          status: data.status,
         })
       })
       .catch((err) => {
@@ -109,15 +84,31 @@ exports.login = async (req, res) => {
 
     if (!user) {
       return res.status(404).send({
-        message: "User does not exists!",
+        message: "Email not registered!",
       })
     }
 
     const isMatch = await bcrypt.compare(password, user.password)
 
     if (!isMatch) {
-      return res.status(404).send({
+      return res.status(403).send({
         message: "Incorrect password!",
+      })
+    }
+
+    let profile = {}
+
+    if (user.userType) {
+      await Driver.findOne({ userID: user._id }).then((data) => {
+        if (data) {
+          profile = data
+        }
+      })
+    } else {
+      await Passenger.findOne({ userID: user._id }).then((data) => {
+        if (data) {
+          profile = data
+        }
       })
     }
 
@@ -133,41 +124,16 @@ exports.login = async (req, res) => {
     res.status(200).send({
       message: "Logged in successfully!",
       token: token,
+      id: user._id,
       name: user.name,
       email: user.email,
-      location: user.location,
       userType: user.userType,
-      status: user.status,
+      profile: profile,
     })
   } catch (err) {
     console.log(err)
     res.status(500).send({
       message: "An error occurred while logging in!",
-    })
-  }
-}
-
-exports.getinfo = async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id)
-
-    if (!user) {
-      return res.status(404).send({
-        message: "Invalid token!",
-      })
-    }
-
-    res.status(200).send({
-      name: user.name,
-      email: user.email,
-      location: user.location,
-      userType: user.userType,
-      status: user.status,
-    })
-  } catch (err) {
-    console.log(err)
-    res.status(500).send({
-      message: "An error occurred while fetching details!",
     })
   }
 }
@@ -180,18 +146,18 @@ exports.update = async (req, res) => {
   }
 
   try {
+    if (req.body.update.email || req.body.update.userType) {
+      return res.status(403).send({
+        message: "Can not update email or user type!",
+      })
+    }
+
     if (req.body.update.password) {
       const salt = await bcrypt.genSalt(10)
       req.body.update.password = await bcrypt.hash(
         req.body.update.password,
         salt
       )
-    }
-
-    if (req.body.update.profile) {
-      return res.status(400).send({
-        message: "Bad request!",
-      })
     }
 
     await User.findByIdAndUpdate(req.user.id, req.body.update, {
@@ -226,31 +192,37 @@ exports.delete = async (req, res) => {
       })
 
     if (user.userType) {
-      const driver = await Driver.findById(user.profile)
+      const driver = await Driver.findOne({ userID: user._id })
 
-      await Vehicle.findByIdAndRemove(driver.vehicle, {
-        useFindAndModify: false,
-      }).catch((err) => {
-        throw err
-      })
-      await Driver.findByIdAndRemove(driver._id, {
-        useFindAndModify: false,
-      }).catch((err) => {
-        throw err
-      })
+      if (driver) {
+        await Vehicle.findByIdAndRemove(driver.vehicleID, {
+          useFindAndModify: false,
+        }).catch((err) => {
+          throw err
+        })
+        await Driver.findByIdAndRemove(driver._id, {
+          useFindAndModify: false,
+        }).catch((err) => {
+          throw err
+        })
+      }
+    } else {
+      const passenger = await Passenger.findOne({ userID: user._id })
+
+      if (passenger) {
+        await Passenger.findByIdAndRemove(passenger._id, {
+          useFindAndModify: false,
+        }).catch((err) => {
+          throw err
+        })
+      }
     }
 
     await User.findByIdAndRemove(user._id, { useFindAndModify: false })
       .then((data) => {
-        if (!data) {
-          res.status(404).send({
-            message: `Invalid token!`,
-          })
-        } else {
-          res.status(200).send({
-            message: "User deleted successfully!",
-          })
-        }
+        res.status(200).send({
+          message: "User deleted successfully!",
+        })
       })
       .catch((err) => {
         throw err

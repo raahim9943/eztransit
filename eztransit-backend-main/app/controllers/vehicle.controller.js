@@ -1,26 +1,30 @@
 const db = require("../models")
-const Vehicle = db.vehicles
+const Vehicle = db.vehicleModel
 
 exports.create = async (req, res) => {
   if (!req.body) {
-    return res.status(400).send({ message: "Request body empty!" })
+    return res.status(400).send({
+      message: "Invalid Request!",
+    })
   }
 
-  const { manufacturer, model, regNum, color } = req.body
+  const { manufacturer, model, registrationNumber, color } = req.body
 
   try {
-    const alreadyExists = Vehicle.find({ regNum: regNum })
+    let vehicle = await Vehicle.findOne({
+      registrationNumber: registrationNumber,
+    })
 
-    if (alreadyExists) {
-      return res.status(400).send({
-        message: "Vehicle already exists in database!",
+    if (vehicle) {
+      return res.status(409).send({
+        message: "Vehicle already exists!",
       })
     }
 
-    const vehicle = new Vehicle({
+    vehicle = new Vehicle({
       manufacturer,
       model,
-      regNum,
+      registrationNumber,
       color,
     })
 
@@ -29,7 +33,7 @@ exports.create = async (req, res) => {
       .then((data) => {
         res.status(200).send({
           message: "Vehicle successfully registered!",
-          profile: data._id,
+          id: data._id,
         })
       })
       .catch((err) => {
