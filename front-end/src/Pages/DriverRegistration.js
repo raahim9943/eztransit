@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import FormInput from "../Components/FormInput";
+import axios from "axios"
 
-export default function DriverRegistration() {
+export default function DriverRegistration({user, setUser}) {
+  const navigate = useNavigate()
 
   const [values, setValues] = useState({
     name: "",
@@ -10,6 +12,18 @@ export default function DriverRegistration() {
     password: "",
     confirmPassword: "",
   });
+
+  useEffect(()=>{
+    if(user) {
+      if (user.token) {
+        if (user.userType) {
+          navigate("/dashboard")
+        } else {
+          navigate("/")
+        }
+      }
+    }
+  }, [])
 
   const inputs = [
     {
@@ -57,6 +71,34 @@ export default function DriverRegistration() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    var options = {
+      method: "POST",
+      url: "//localhost:1337/api/auth/user/register",
+      headers: { "Content-Type": "application/json" },
+      data: {
+        name: values.name,
+        email: values.email,
+        password: values.password,
+        userType: true
+      },
+    }
+
+    axios
+        .request(options)
+        .then(function (response){
+          console.log(response.data)
+          setUser({
+            token: response.data.token,
+            id: response.data.id,
+            name: response.data.name,
+            email: response.data.email,
+            userType: response.data.userType,
+            profile: {},
+          })
+        })
+        .catch(function (error){
+          console.error(error)
+        })
   };
 
   const onChange = (e) => {
