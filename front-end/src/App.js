@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Routes, Route } from "react-router-dom"
 import Header from "./Components/Header"
 import Footer from "./Components/Footer"
@@ -17,23 +17,30 @@ import ContactPage from "./Pages/ContactPage"
 import TermsPage from "./Pages/TermsPage"
 
 function App() {
+  const [user, setUser] = useState(null)
   return (
     <div className='flex flex-col min-h-screen justify-between bg-gradient-to-r from-[#0F2027] via-[#203A43] to-[#2C5364]'>
       <Header />
       <Routes>
-        <Route path='/' element={<LandingPage />} />
-        <Route path="PassengerRegistration" element={<PassengerRegistration />} />
-        <Route path="DriverRegistration" element={<DriverRegistration />} />
-        <Route path="VehicleInformation" element={<VehicleInformation />} />
-        <Route path="LoginPage" element={<LoginPage />} />
-        <Route path="PasswordReset" element={<PasswordReset />} />
-        <Route path="PassengerDashboard" element={<PassengerDashboard />} />
-        <Route path="DriverDashboard" element={<DriverDashboard />}/>
-        <Route path="HelpPage" element={<HelpPage />} />
-        <Route path="AboutPage" element={<AboutPage />} />
-        <Route path="TermsPage" element={<TermsPage />} />
-        <Route path="ContactPage" element={<ContactPage />} />
-        <Route path="CareersPage" element={<CareersPage />} />
+        <Route
+          path='welcome'
+          element={<LandingPage user={user} setUser={setUser} />}
+        />
+        <Route
+          path='register/passenger'
+          element={<PassengerRegistration user={user} setUser={setUser} />}
+        />
+        <Route path='register/driver' element={<DriverRegistration />} />
+        <Route path='register/vehicle' element={<VehicleInformation />} />
+        <Route path='login' element={<LoginPage />} />
+        <Route path='login/reset' element={<PasswordReset />} />
+        <Route path='/' element={<PassengerDashboard />} />
+        <Route path='/dashboard' element={<DriverDashboard />} />
+        <Route path='help' element={<HelpPage />} />
+        <Route path='about' element={<AboutPage />} />
+        <Route path='terms' element={<TermsPage />} />
+        <Route path='contact' element={<ContactPage />} />
+        <Route path='careers' element={<CareersPage />} />
       </Routes>
       <Footer />
     </div>
