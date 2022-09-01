@@ -6,11 +6,11 @@ export default function Footer() {
     <>
       <div className='flex flex-col items-center justify-center w-full py-8 space-y-4'>
         <div className='flex flex-row items-center justify-center space-x-6 text-[#D8DFE5] text-base font-medium'>
-          <Link to="/HelpPage">Help</Link>
-          <Link to="/AboutPage">About</Link>
-          <Link to="/TermsPage">Terms</Link>
-          <Link to="/CareersPage">Careers</Link>
-          <Link to="/ContactPage">Contact</Link>
+          <Link to="/help">Help</Link>
+          <Link to="/about">About</Link>
+          <Link to="/terms">Terms</Link>
+          <Link to="/careers">Careers</Link>
+          <Link to="/contact">Contact</Link>
         </div>
         <div className='text-[#D8DFE5] text-base font-medium'>
           ©2022 EZTransit

@@ -128,13 +128,13 @@ export default function DriverRegistration({user, setUser}) {
           <Link
             className="text-[#D8DFE5] text-center"
             type="submit"
-            to="/VehicleInformation"
+            to="/register/vehicle"
           >
             Next
           </Link>
         </form>
       </div>
-      <Link to="/LoginPage" className="text-lg font-medium text-[#D8DFE5] py-8">
+      <Link to="/login" className="text-lg font-medium text-[#D8DFE5] py-8">
         Have an account? Log In
       </Link>
     </div>

@@ -126,7 +126,7 @@ export default function PassengerRegistration({ user, setUser }) {
           <button className='text-[#D8DFE5]'>Register</button>
         </form>
       </div>
-      <Link to='/LoginPage' className='text-lg font-medium text-[#D8DFE5] py-8'>
+      <Link to='/login' className='text-lg font-medium text-[#D8DFE5] py-8'>
         Have an account? Log In
       </Link>
     </div>

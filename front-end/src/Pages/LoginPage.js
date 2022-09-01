@@ -57,13 +57,13 @@ export default function LoginPage() {
           <Link
             className="text-[#D8DFE5] text-center"
             type="submit"
-            to="/PassengerDashboard"
+            to="/dashboard/passenger"
           >
             Login
           </Link>
         </form>
       </div>
-      <Link className="text-xs font-medium text-[#D8DFE5]" to="/PasswordReset">
+      <Link className="text-xs font-medium text-[#D8DFE5]" to="/login/reset">
         Forgotten Password?
       </Link>
       <Link to="/" className="text-lg font-medium text-[#D8DFE5] py-8">

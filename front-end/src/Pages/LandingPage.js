@@ -10,9 +10,9 @@ export default function LandingPage({ user, setUser }) {
     if (user) {
       if (user.token) {
         if (user.userType) {
-          navigate("/dashboard")
+          navigate("/dashboard/driver")
         } else {
-          navigate("/")
+          navigate("/dashboard/passenger")
         }
       } else {
         if (user.userType) {
